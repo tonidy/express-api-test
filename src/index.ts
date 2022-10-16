@@ -7,6 +7,7 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+  console.log('just got request');
   res.status(200).send('hi');
 });
 
