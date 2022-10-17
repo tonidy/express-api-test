@@ -1,7 +1,7 @@
-# express-api-test
+# Monorepo for several projects
 
-This is the simplest possible nodejs api using express that responds to any request with:
+## Project list:
 
-```
-hi
-```
+1. Todo App
+2. Ticketing App
+3. etc
