@@ -44,6 +44,15 @@ app.get('/todos', (req, res) => {
   res.status(200).json(todos);
 });
 
+app.get('/todos/:id', (req, res) => {
+  const todo = todos.find((e, i) => i === req.params.id - 1);
+  if (todo) {
+    res.status(200).json(todo);
+    return;
+  }
+  res.status(404).json({ msg: 'todo not found' });
+});
+
 app.post('/todos', (req, res) => {
   const todo = req.body;
   if (todo.hasOwnProperty('title')) {
@@ -60,7 +69,7 @@ app.post('/todos', (req, res) => {
 });
 
 app.put('/todos/:id', (req, res) => {
-  const todo = todos.find((todo) => todo.id === req.params.id);
+  const todo = todos.find((e, i) => i === req.params.id - 1);
   if (todo) {
     const { title, desc, completed } = req.body;
     todo.title = title;
@@ -71,7 +80,7 @@ app.put('/todos/:id', (req, res) => {
     return;
   }
 
-  response.status(404).json({ msg: 'todo not found' });
+  res.status(404).json({ msg: 'todo not found' });
 });
 
 app.delete('/todos/:id', (req, res) => {
@@ -80,10 +89,10 @@ app.delete('/todos/:id', (req, res) => {
   if (todoIndex) {
     todos.splice(todoIndex, 1);
 
-    response.status(200).json({ msg: 'successfully deleted tood' });
+    res.status(200).json({ msg: 'successfully deleted tood' });
   }
 
-  response.status(404).json({ msg: 'todo not found' });
+  res.status(404).json({ msg: 'todo not found' });
 });
 
 app.listen(PORT, () => {
